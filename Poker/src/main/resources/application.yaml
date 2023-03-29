@@ -1,14 +1,14 @@
 server:
   port: 8080
 
-debug: true
+
 management.endpoints.web.exposure.include: "*"
 
 logging:
   level:
-    com.keyworld.projectboard: debug
-    org.springframework.web.servlet: debug
-    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    com.keyworld.projectboard: off
+    org.springframework.web.servlet: off
+    org.hibernate.type.descriptor.sql.BasicBinder: off
 
 spring:
   servlet:
