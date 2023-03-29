@@ -20,7 +20,7 @@ public class PlayerController {
     private PlayerService playerService;
 
     @PostMapping("/new")
-    public ResponseEntity<PlayerDTO> createPlayer(@Valid @RequestBody PlayerDTO playerDTO) {
+    public ResponseEntity<PlayerDTO> createPlayer(@Valid @ModelAttribute PlayerDTO playerDTO) {
         PlayerDTO createdPlayerDTO = playerService.createPlayer(playerDTO);
         return new ResponseEntity<>(createdPlayerDTO, HttpStatus.CREATED);
     }
@@ -38,7 +38,7 @@ public class PlayerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PlayerDTO> updatePlayer(@PathVariable("id") Long id, @Valid @RequestBody PlayerDTO playerDTO) {
+    public ResponseEntity<PlayerDTO> updatePlayer(@PathVariable("id") Long id, @Valid @ModelAttribute PlayerDTO playerDTO) {
         PlayerDTO updatedPlayerDTO = playerService.updatePlayer(id, playerDTO);
         return new ResponseEntity<>(updatedPlayerDTO, HttpStatus.OK);
     }
