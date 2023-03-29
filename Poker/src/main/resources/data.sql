@@ -1,0 +1,1 @@
+insert into player (name, cash) values  ('asdf', 123);
