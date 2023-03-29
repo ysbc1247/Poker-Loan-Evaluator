@@ -1,7 +1,9 @@
 package com.projects.poker.service;
 
+import com.projects.poker.domain.Loan;
 import com.projects.poker.domain.Player;
 import com.projects.poker.dto.PlayerDTO;
+import com.projects.poker.repository.LoanRepository;
 import com.projects.poker.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -16,6 +18,8 @@ public class PlayerService {
     @Autowired
     private PlayerRepository playerRepository;
 
+    @Autowired
+    private LoanRepository loanRepository;
     public PlayerDTO createPlayer(PlayerDTO playerDTO) {
         Player player = new Player();
         player.setName(playerDTO.getName());
@@ -50,6 +54,19 @@ public class PlayerService {
         Player player = playerRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new);
         playerRepository.delete(player);
+    }
+
+    public double getPlayerBalance(Player player) {
+        List<Loan> lenderLoans = loanRepository.findByLender(player);
+        List<Loan> borrowerLoans = loanRepository.findByBorrower(player);
+        double cash = 0;
+        for(Loan loan: lenderLoans){
+            cash += loan.getAmount();
+        }
+        for (Loan loan : borrowerLoans){
+            cash -= loan.getAmount();
+        }
+        return cash;
     }
 
     private PlayerDTO mapPlayerToDTO(Player player) {
