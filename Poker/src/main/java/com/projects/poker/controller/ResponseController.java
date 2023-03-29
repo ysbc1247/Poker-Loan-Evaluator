@@ -18,7 +18,7 @@ public class ResponseController {
     private ResponseService responseService;
 
     @PostMapping("/new")
-    public ResponseEntity<ResponseDTO> createResponse(@Valid @RequestBody ResponseDTO responseDTO) {
+    public ResponseEntity<ResponseDTO> createResponse(@Valid @ModelAttribute ResponseDTO responseDTO) {
         ResponseDTO createdResponseDTO = responseService.createResponse(responseDTO);
         return new ResponseEntity<>(createdResponseDTO, HttpStatus.CREATED);
     }
@@ -36,7 +36,7 @@ public class ResponseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDTO> updateResponse(@PathVariable("id") Long id, @Valid @RequestBody ResponseDTO responseDTO) {
+    public ResponseEntity<ResponseDTO> updateResponse(@PathVariable("id") Long id, @Valid @ModelAttribute ResponseDTO responseDTO) {
         ResponseDTO updatedResponseDTO = responseService.updateResponse(id, responseDTO);
         return new ResponseEntity<>(updatedResponseDTO, HttpStatus.OK);
     }
