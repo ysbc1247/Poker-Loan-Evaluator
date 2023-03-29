@@ -18,6 +18,8 @@ public class PlayerController {
 
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private PlayerRepository playerRepository;
 
     @PostMapping("/new")
     public ResponseEntity<PlayerDTO> createPlayer(@Valid @ModelAttribute PlayerDTO playerDTO) {
@@ -35,6 +37,11 @@ public class PlayerController {
     public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
         List<PlayerDTO> playerDTOs = playerService.getAllPlayers();
         return new ResponseEntity<>(playerDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/cash")
+    public ResponseEntity<Double> getPlayerCash(@PathVariable("id") Long id){
+        return new ResponseEntity<>(playerService.getPlayerBalance(playerRepository.findById(id).orElse(null)), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
