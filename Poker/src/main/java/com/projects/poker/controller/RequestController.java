@@ -18,7 +18,7 @@ public class RequestController {
     private RequestService requestService;
 
     @PostMapping("/new")
-    public ResponseEntity<RequestDTO> createRequest(@Valid @RequestBody RequestDTO requestDTO) {
+    public ResponseEntity<RequestDTO> createRequest(@Valid @ModelAttribute RequestDTO requestDTO) {
         RequestDTO createdRequestDTO = requestService.createRequest(requestDTO);
         return new ResponseEntity<>(createdRequestDTO, HttpStatus.CREATED);
     }
@@ -36,7 +36,7 @@ public class RequestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RequestDTO> updateRequest(@PathVariable("id") Long id, @Valid @RequestBody RequestDTO requestDTO) {
+    public ResponseEntity<RequestDTO> updateRequest(@PathVariable("id") Long id, @Valid @ModelAttribute RequestDTO requestDTO) {
         RequestDTO updatedRequestDTO = requestService.updateRequest(id, requestDTO);
         return new ResponseEntity<>(updatedRequestDTO, HttpStatus.OK);
     }
