@@ -17,11 +17,11 @@ public class Request {
     @Column(name = "amount")
     private double amount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "borrower_id")
     private Player borrower;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "lender_id")
     private Player lender;
 
