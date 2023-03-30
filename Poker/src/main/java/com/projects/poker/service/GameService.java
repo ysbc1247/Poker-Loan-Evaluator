@@ -33,7 +33,7 @@ public class GameService {
 
     public GameDTO endGame(Long id) {
         Game game = gameRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         game.setEndTime(LocalDateTime.now());
         game = gameRepository.save(game);
         calculateAndSaveLoans(game);
