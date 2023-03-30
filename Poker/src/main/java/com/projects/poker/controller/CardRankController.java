@@ -14,7 +14,7 @@ public class CardRankController {
     @Autowired
     private CardRankService cardRankService;
     @GetMapping
-    public int getCardRank(@RequestParam String card1, @RequestParam String card2){
-        return cardRankService.cardRank(card1, card2);
+    public int getCardRank(@RequestParam String card1, @RequestParam String card2, @RequestParam Boolean suited){
+        return cardRankService.cardRank(card1, card2, suited);
     }
 }
