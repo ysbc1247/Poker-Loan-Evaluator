@@ -28,11 +28,11 @@ public class LoanService {
 
     public LoanDTO createLoan(LoanDTO loanDTO) {
         Player lender = playerRepository.findById(loanDTO.getLenderId())
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         Player borrower = playerRepository.findById(loanDTO.getBorrowerId())
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         Game game = gameRepository.findById(loanDTO.getGameId())
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         Loan loan = new Loan();
         loan.setAmount(loanDTO.getAmount());
         loan.setLender(lender);
@@ -45,7 +45,7 @@ public class LoanService {
 
     public LoanDTO updateLoan(Long id, LoanDTO loanDTO) {
         Loan loan = loanRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         loan.setAmount(loanDTO.getAmount());
         loanRepository.save(loan);
         return mapLoanToDTO(loan);
@@ -53,8 +53,12 @@ public class LoanService {
 
     public LoanDTO getLoanById(Long id) {
         Loan loan = loanRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         return mapLoanToDTO(loan);
+    }
+
+    public void deleteLoanById(Long id){
+        loanRepository.deleteById(id);
     }
 
     public List<LoanDTO> getAllLoans() {
