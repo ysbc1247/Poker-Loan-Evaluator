@@ -23,9 +23,12 @@ public class CardRankService {
             "8-3", "5-3s", "8-2", "7-5", "6-5", "7-4", "5-2s", "7-3",
             "6-4", "7-2", "6-3", "6-2", "5-4", "5-3", "5-2"
     };
-    public int cardRank(String card1, String card2) {
+    public int cardRank(String card1, String card2, Boolean suited) {
         int rank = -1;
         String hand = card1 + "-" + card2;
+        if(suited){
+            hand += 's';
+        }
         for (int i = 0; i < handRanks.length; i++) {
             if (handRanks[i].equals(hand)) {
                 rank = i + 1;
