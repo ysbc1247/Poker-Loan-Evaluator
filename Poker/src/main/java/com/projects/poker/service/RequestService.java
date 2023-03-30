@@ -23,9 +23,9 @@ public class RequestService {
 
     public RequestDTO createRequest(RequestDTO requestDTO) {
         Player borrower = playerRepository.findById(requestDTO.getBorrowerId())
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         Player lender = playerRepository.findById(requestDTO.getLenderId())
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
 
         Request request = new Request();
         request.setAmount(requestDTO.getAmount());
@@ -38,7 +38,7 @@ public class RequestService {
 
     public RequestDTO getRequestById(Long id) {
         Request request = requestRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         return mapRequestToDTO(request);
     }
 
@@ -51,11 +51,11 @@ public class RequestService {
 
     public RequestDTO updateRequest(Long id, RequestDTO requestDTO) {
         Request request = requestRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         Player borrower = playerRepository.findById(requestDTO.getBorrowerId())
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         Player lender = playerRepository.findById(requestDTO.getLenderId())
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         request.setAmount(requestDTO.getAmount());
         request.setBorrower(borrower);
         request.setLender(lender);
@@ -65,7 +65,7 @@ public class RequestService {
 
     public void deleteRequest(Long id) {
         Request request = requestRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         requestRepository.delete(request);
     }
 
