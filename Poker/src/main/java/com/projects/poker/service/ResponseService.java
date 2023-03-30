@@ -23,7 +23,7 @@ public class ResponseService {
 
     public ResponseDTO createResponse(ResponseDTO responseDTO) {
         Request request = requestRepository.findById(responseDTO.getRequestId())
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
 
         Response response = new Response();
         response.setAmount(responseDTO.getAmount());
@@ -36,7 +36,7 @@ public class ResponseService {
 
     public ResponseDTO getResponseById(Long id) {
         Response response = responseRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         return mapResponseToDTO(response);
     }
 
@@ -49,9 +49,9 @@ public class ResponseService {
 
     public ResponseDTO updateResponse(Long id, ResponseDTO responseDTO) {
         Response response = responseRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         Request request = requestRepository.findById(responseDTO.getRequestId())
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         response.setAmount(responseDTO.getAmount());
         response.setConfirm(responseDTO.getConfirm());
         response.setRequestId(request.getId());
@@ -62,7 +62,7 @@ public class ResponseService {
 
     public void deleteResponse(Long id) {
         Response response = responseRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
         responseRepository.delete(response);
     }
 
