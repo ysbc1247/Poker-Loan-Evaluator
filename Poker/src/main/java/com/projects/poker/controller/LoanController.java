@@ -29,6 +29,11 @@ public class LoanController {
         return ResponseEntity.ok().body(loanDTO);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteLoan(@PathVariable(value = "id") Long id){
+        loanService.deleteLoanById(id);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<LoanDTO> getLoanById(@PathVariable(value = "id") Long id) {
         LoanDTO loanDTO = loanService.getLoanById(id);
