@@ -33,6 +33,11 @@ public class PlayerController {
         return new ResponseEntity<>(playerDTO, HttpStatus.OK);
     }
 
+    @GetMapping("/valid")
+    public Boolean validatePassword(@RequestParam Long id, @RequestParam String password){
+        return playerService.validPassword(id, password);
+    }
+
     @GetMapping("")
     public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
         List<PlayerDTO> playerDTOs = playerService.getAllPlayers();
