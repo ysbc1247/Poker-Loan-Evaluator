@@ -11,4 +11,6 @@ public class PlayerDTO {
     private String name;
 
     private Long cash;
+
+    private String password;
 }
