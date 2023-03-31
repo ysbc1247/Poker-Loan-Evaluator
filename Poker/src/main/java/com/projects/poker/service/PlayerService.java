@@ -10,6 +10,8 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -67,6 +69,11 @@ public class PlayerService {
             cash -= loan.getAmount();
         }
         return cash;
+    }
+
+    public Boolean validPassword(Long id, String password){
+        Player player = playerRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        return Objects.equals(player.getPassword(), password);
     }
 
     private PlayerDTO mapPlayerToDTO(Player player) {
