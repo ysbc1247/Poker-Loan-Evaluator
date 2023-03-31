@@ -20,5 +20,7 @@ public class Player {
     @Column(name = "cash")
     private Long cash;
 
+    @Column(name = "password")
+    private String password;
 
 }
